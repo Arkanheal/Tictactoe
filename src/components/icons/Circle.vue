@@ -9,3 +9,9 @@
 </g>
 </svg>
 </template>
+
+<style scoped>
+svg{
+  fill: #820933
+}
+</style>

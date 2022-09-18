@@ -3,3 +3,9 @@
 <polygon points="8 2.75,1.75 14.25,14.25 14.25"/>
 </svg>
 </template>
+
+<style scoped>
+svg{
+  stroke: #A07458
+}
+</style>
