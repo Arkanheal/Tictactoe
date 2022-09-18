@@ -7,7 +7,7 @@ export default {
     }
   },
   computed: {
-    comp (): AsyncComp {
+    comp () {
       if(this.symbol !== ""){
         return defineAsyncComponent(() => import(`./icons/${this.symbol}.vue`))
       }
@@ -15,10 +15,6 @@ export default {
   },
   emits: ['checkTurn']
 }
-import Circle from './icons/Circle.vue';
-import Square from './icons/Square.vue';
-import Triangle from './icons/Triangle.vue';
-import Cross from './icons/Cross.vue';
 import { defineAsyncComponent } from 'vue';
 </script>
 
