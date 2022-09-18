@@ -1,11 +1,30 @@
 <script lang="ts">
 export default {
-    props: ['symbol']
+  props: {
+    'symbol': {
+      type: String,
+      required: true,
+    }
+  },
+  computed: {
+    comp (): AsyncComp {
+      if(this.symbol !== ""){
+        return defineAsyncComponent(() => import(`./icons/${this.symbol}.vue`))
+      }
+    },
+  },
+  emits: ['checkTurn']
 }
+import Circle from './icons/Circle.vue';
+import Square from './icons/Square.vue';
+import Triangle from './icons/Triangle.vue';
+import Cross from './icons/Cross.vue';
+import { defineAsyncComponent } from 'vue';
 </script>
 
 <template>
-  <div class="cell">
+  <div class="cell" @click.once="$emit('checkTurn')">
+    <component :is="comp"></component>
   </div>
 </template>
 

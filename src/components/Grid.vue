@@ -1,57 +1,34 @@
 <script lang="ts">
 import Tile from "./Tile.vue";
+import grid_json from "../assets/json/grid.json";
 export default { 
   components: { Tile },
   data() {
     return {
-      tiles: [
-        {
-          id: 1,
-          symbol: 0,
-        },
-        {
-          id: 1,
-          symbol: 0,
-        },
-        {
-          id: 1,
-          symbol: 0,
-        },
-        {
-          id: 1,
-          symbol: 0,
-        },
-        {
-          id: 1,
-          symbol: 0,
-        },
-        {
-          id: 1,
-          symbol: 0,
-        },
-        {
-          id: 1,
-          symbol: 0,
-        },
-        {
-          id: 1,
-          symbol: 0,
-        },
-        {
-          id: 1,
-          symbol: 0,
-        },
-      ]
+      turn: 0,
+      tiles: grid_json,
+      symbols: ["Cross", "Triangle","Circle","Square"]
     }
   },
+  methods: {
+    checkTurn(index: number) {
+      if(this.turn === 0){
+        this.tiles[index].symbol = this.symbols[this.turn];
+      }
+      this.tiles[index].symbol = this.symbols[this.turn%4];
+      this.turn++;
+    }
   }
+}
 </script>
 
 <template>
 <div id="main_grid">
   <Tile
-    v-for="n in 16"
-    :key="n" 
+    v-for="(tile, index,) in tiles"
+    :key="tile.id" 
+    :symbol="tile.symbol"
+    @checkTurn="checkTurn(index)"
   />
 </div>
 </template>
@@ -59,8 +36,7 @@ export default {
 <style scoped>
 #main_grid{
   margin: auto;
-  width: 50%;
-  height: max(250px, 50%);
+  width: max(300px, 35%);
   display: grid;
   grid-template-columns: repeat(4, minmax(20px, 1fr));
   gap: 0;
