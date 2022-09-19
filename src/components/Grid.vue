@@ -1,31 +1,28 @@
-<script lang="ts">
+<script setup lang="ts">
 import Tile from "./Tile.vue";
-import grid_json from "../assets/json/grid.json";
-export default { 
-  components: { Tile },
-  data() {
-    return {
-      turn: 0,
-      tiles: grid_json,
-      symbols: ["Cross", "Triangle","Circle","Square"]
+import { useGridStore } from '@/stores/grid.js'
+import { reactive } from "vue";
+
+const store = useGridStore();
+const symbols = reactive(["Cross","Triangle","Circle","Square"])
+
+function checkTurn(index: number) {
+    if(!store.grid[index].clickable){
+      return
     }
-  },
-  methods: {
-    checkTurn(index: number) {
-      if(this.turn === 0){
-        this.tiles[index].symbol = this.symbols[this.turn];
-      }
-      this.tiles[index].symbol = this.symbols[this.turn%4];
-      this.turn++;
+    if(store.turn === 0){
+      store.grid[index].symbol = symbols[store.turn];
     }
-  }
+    store.grid[index].symbol = symbols[store.turn%4];
+    store.grid[index].clickable = false;
+    store.turn++;
 }
 </script>
 
 <template>
 <div id="main_grid">
   <Tile
-    v-for="(tile, index,) in tiles"
+    v-for="(tile, index,) in store.grid"
     :key="tile.id" 
     :symbol="tile.symbol"
     @checkTurn="checkTurn(index)"
@@ -41,6 +38,7 @@ export default {
   grid-template-columns: repeat(4, minmax(20px, 1fr));
   gap: 0;
   border-radius: 10px;
-  border: 5px solid black;
+  border: 5px solid var(--color-text);
+;
 } 
 </style>

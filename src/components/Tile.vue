@@ -19,7 +19,7 @@ import { defineAsyncComponent } from 'vue';
 </script>
 
 <template>
-  <div class="cell" @click.once="$emit('checkTurn')">
+  <div class="cell" @click="$emit('checkTurn')">
     <component :is="comp"></component>
   </div>
 </template>
@@ -27,12 +27,12 @@ import { defineAsyncComponent } from 'vue';
 <style scoped>
 .cell {
   aspect-ratio: 1/ 1;
-  background-color: #AFAFAF;
+  background-color: var(--color-background);
   color: #1E1E1E;
   display: flex;
   place-content: center;
   padding: 5%;
-  border: 1px solid black;
+  border: 1px solid var(--color-text);
 }
 svg{
   width: 100%;
