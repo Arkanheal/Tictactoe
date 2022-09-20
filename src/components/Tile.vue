@@ -1,21 +1,15 @@
-<script lang="ts">
-export default {
-  props: {
-    'symbol': {
-      type: String,
-      required: true,
-    }
-  },
-  computed: {
-    comp () {
-      if(this.symbol !== ""){
-        return defineAsyncComponent(() => import(`./icons/${this.symbol}.vue`))
-      }
-    },
-  },
-  emits: ['checkTurn']
-}
+<script setup lang="ts">
+import { computed } from '@vue/reactivity';
 import { defineAsyncComponent } from 'vue';
+const emit = defineEmits(['checkTurn']);
+const props = defineProps({symbol: {type: String, required: true}});
+const comp = computed(() => {
+  if(props.symbol !== "") {
+    return defineAsyncComponent(
+      () => import(`./icons/${props.symbol}.vue`)
+    )
+  }
+})
 </script>
 
 <template>
