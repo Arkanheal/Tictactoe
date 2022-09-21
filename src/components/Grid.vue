@@ -5,21 +5,28 @@ import { useGridStore } from '@/stores/grid.js'
 
 const store = useGridStore();
 
-function checkTurn(index: number) {
+function checkVictory(index: number, index_row: number) {
 
-    if(!store.grid[index].clickable){
-      return
-    }
+  let currentSymbol = store.grid[index_row][index].symbol;
 
-    if(store.turn === 0){
-      store.grid[index].symbol = store.symbols[store.turn];
-    }
+}
 
-    store.grid[index].symbol = store.symbols[store.turn%4];
-    store.grid[index].clickable = false;
+function checkTurn(index: number, index_row : number) {
 
+  if(!store.grid[index_row][index].clickable){
+    return
+  }
 
-    store.turn++;
+  if(store.turn === 0){
+    store.grid[index_row][index].symbol = store.symbols[store.turn];
+  }
+
+  store.grid[index_row][index].symbol = store.symbols[store.turn%4];
+  store.grid[index_row][index].clickable = false;
+
+  checkVictory(index, index_row);
+
+  store.turn++;
 
 }
 
@@ -29,12 +36,15 @@ function checkTurn(index: number) {
 
 <div id="main_grid">
 
+  <div class="row" v-for="(row, index_row,) in store.grid"
+    :key="index_row"
+  >
   <Tile
-    v-for="(tile, index,) in store.grid"
-    :key="tile.id" 
+    v-for="(tile, index,) in row"
+    :key="index"
     :symbol="tile.symbol"
-    @checkTurn="checkTurn(index)"
-  />
+    @checkTurn="checkTurn(index, index_row)"
+  /></div>
 
 </div>
 

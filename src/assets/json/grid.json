@@ -1,80 +1,72 @@
 [
+  [
     {
-      "id": 1,
       "symbol": "",
       "clickable": true
     },
     {
-      "id": 2,
       "symbol": "",
       "clickable": true
     },
     {
-      "id": 3,
-      "symbol": "", "clickable": true 
+      "symbol": "",
+      "clickable": true 
     },
     {
-      "id": 4,
+      "symbol": "",
+      "clickable": true
+    }
+  ],
+  [
+    {
       "symbol": "",
       "clickable": true
     },
     {
-      "id": 5,
       "symbol": "",
       "clickable": true
     },
     {
-      "id": 6,
       "symbol": "",
       "clickable": true
     },
     {
-      "id": 7,
+      "symbol": "",
+      "clickable": true
+    }
+  ],
+  [
+    {
       "symbol": "",
       "clickable": true
     },
     {
-      "id": 8,
       "symbol": "",
       "clickable": true
     },
     {
-      "id": 9,
       "symbol": "",
       "clickable": true
     },
     {
-      "id": 10,
+      "symbol": "",
+      "clickable": true
+    }
+  ],
+  []
+    {
       "symbol": "",
       "clickable": true
     },
     {
-      "id": 11,
       "symbol": "",
       "clickable": true
     },
     {
-      "id": 12,
       "symbol": "",
       "clickable": true
     },
     {
-      "id": 13,
-      "symbol": "",
-      "clickable": true
-    },
-    {
-      "id": 14,
-      "symbol": "",
-      "clickable": true
-    },
-    {
-      "id": 15,
-      "symbol": "",
-      "clickable": true
-    },
-    {
-      "id": 16,
       "symbol": "",
       "clickable": true
     }
