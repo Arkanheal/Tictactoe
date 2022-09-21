@@ -34,12 +34,12 @@ const comp = computed(() => {
       Nouvelle partie
     </div>
 
-    <div>
-      Turn: {{ store.turn }} 
-    </div>
-
     <div class="symbol_info">
       Next Symbol: <component :is="comp"></component>
+    </div>
+
+    <div>
+      Turn: {{ store.turn >= 15 ? 'Dernier tour' : store.turn }} 
     </div>
 
   </div>
@@ -61,12 +61,8 @@ const comp = computed(() => {
   margin-bottom: max(50px, 5vh);
 }
 
-.symbol_info {
-  align-self: center;
-}
-
 svg {
-  max-height: 15px;
+  width: max(25px, 1vh);
 }
 
 </style>

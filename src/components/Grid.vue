@@ -17,6 +17,8 @@ function checkTurn(index: number) {
 
     store.grid[index].symbol = store.symbols[store.turn%4];
     store.grid[index].clickable = false;
+
+
     store.turn++;
 
 }

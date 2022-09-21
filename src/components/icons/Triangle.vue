@@ -1,11 +1,15 @@
 <template>
-<svg width="16px" height="16px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" version="1.1" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5">
-<polygon points="8 2.75,1.75 14.25,14.25 14.25"/>
+<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 490 490" style="enable-background:new 0 0 490 490;" xml:space="preserve">
+<polygon points="30,460 245,30 460,460"/>
 </svg>
 </template>
 
 <style scoped>
 svg{
-  stroke: #A07458
+  fill: none;
+  stroke: #A07458;
+  stroke-width: 30;
+  stroke-linejoin: round;
 }
 </style>
