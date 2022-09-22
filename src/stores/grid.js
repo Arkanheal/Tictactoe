@@ -4,9 +4,11 @@ import grid_json from '../assets/json/grid.json'
 
 export const useGridStore = defineStore('grid', () => {
   function resetGrid(){
-    this.grid.forEach(element => {
-      element.symbol = "";
-      element.clickable = true;
+    this.grid.forEach(row => {
+      row.map(element => {
+        element.symbol = "";
+        element.clickable = true;
+      });
     });
     this.turn = 0
   }
