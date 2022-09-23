@@ -27,7 +27,7 @@ function checkVictory(index: number, index_col: number) {
     (currentSymbol === topSymbol && topSymbol === botSymbol) ||
     (currentSymbol === topLeftSymbol && topLeftSymbol === botRightSymbol) ||
     (currentSymbol === topRightSymbol && topRightSymbol === botLeftSymbol)) {
-    console.log("Won");
+    store.victory = true;
   }
 
   // Second surroundings
@@ -48,7 +48,7 @@ function checkVictory(index: number, index_col: number) {
     (currentSymbol === topRightSymbol && topRightSymbol === topRightFarSymbol) ||
     (currentSymbol === botLeftSymbol && botLeftSymbol === botLeftFarSymbol) ||
     (currentSymbol === botRightSymbol && botRightSymbol === botRightFarSymbol)) {
-    console.log("Won");
+    store.victory = true;
   }
 
   

@@ -13,6 +13,7 @@ export const useGridStore = defineStore('grid', () => {
     this.turn = 0
   }
   const turn = ref(0);
+  const victory =ref(false);
   const grid = ref(grid_json);
   const symbols = ref(["Cross","Triangle","Circle","Square"])
   return { turn, grid, symbols, resetGrid };

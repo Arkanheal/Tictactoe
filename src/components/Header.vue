@@ -30,7 +30,7 @@ const comp = computed(() => {
       Logo
     </div>
 
-    <div class="header_item" @click="store.resetGrid()">
+    <div class="header_item" :class="{ 'end_game': store.victory }" @click="store.resetGrid()">
       Nouvelle partie
     </div>
 
@@ -59,6 +59,17 @@ const comp = computed(() => {
   align-items: center;
   background-color: #343434;
   margin-bottom: max(50px, 5vh);
+}
+
+.end_game {
+  animation: blinker 1.8s linear infinite;
+  color: #E4E4E4;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
 }
 
 svg {
