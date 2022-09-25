@@ -1,6 +1,0 @@
-Donc j'ai besoin:
-  - Une grille ⇒ 16 cases (Matrice)
-    - Une case ⇒ Un bouton avec 5 states
-      - state ⇒ ∆ (DE) + 〇 (0_) + □ (OS) + Ⅹ (aR) ou vide
-  - Une règle de victoire (3 aligné)
-  - Un top menu
