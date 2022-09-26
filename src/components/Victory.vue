@@ -23,7 +23,7 @@ const comp = computed(() => {
 
 <template>
 <div class="message" v-if="store.victory">
-🎉 Victory !! 🎉
+🎉 Victory {{ store.symbols[store.turn%4] }} !! 🎉
 </div>
 </template>
 

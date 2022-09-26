@@ -10,7 +10,8 @@ export const useGridStore = defineStore('grid', () => {
         element.clickable = true;
       });
     });
-    this.turn = 0
+    this.turn = 0;
+    $cookies.set("user-session", Math.random().toString(36).substring(2, 9), "30");
   }
   const turn = ref(0);
   const victory =ref(false);

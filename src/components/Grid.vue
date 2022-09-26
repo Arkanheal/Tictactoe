@@ -3,6 +3,8 @@
 import Tile from "./Tile.vue";
 import { useGridStore } from '@/stores/grid.js'
 
+const userSessionExist : String = $cookies.isKey('user-session');
+
 const store = useGridStore();
 
 function isValidTile(index_col : number, index : number){
@@ -77,7 +79,7 @@ function checkTurn(index: number, index_col : number) {
 
 <template>
 
-<div id="main_grid">
+<div id="main_grid" v-if="userSessionExist">
 
   <div class="col" v-for="(col, index_col,) in store.grid"
     :key="index_col"
