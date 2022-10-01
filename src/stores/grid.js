@@ -13,9 +13,12 @@ export const useGridStore = defineStore('grid', () => {
     this.turn = 0;
     $cookies.set("user-session", Math.random().toString(36).substring(2, 9), "320s");
   }
+
+  const json = JSON.parse(JSON.stringify(grid_json));
+  const id = $cookies.get("gameId")
   const turn = ref(0);
   const victory =ref(false);
-  const grid = ref(grid_json);
+  const grid = ref(json);
   const symbols = ref(["Cross","Triangle","Circle","Square"])
   return { turn, grid, symbols, resetGrid };
 })
