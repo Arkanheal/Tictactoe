@@ -1,24 +1,27 @@
-import { ref, computed } from 'vue'
-import { defineStore } from 'pinia'
-import grid_json from '../assets/json/grid.json'
+import { defineStore } from 'pinia';
+import { addDoc, collection } from 'firebase/firestore';
+import grid_json from '../assets/json/grid.json';
 
 export const useGridStore = defineStore('grid', () => {
-  function resetGrid(){
-    this.grid.forEach(row => {
-      row.map(element => {
-        element.symbol = "";
-        element.clickable = true;
+
+  function newGame(){
+    const json = JSON.parse(JSON.stringify(grid_json));
+    try{
+      await addDoc(collection(db, "games"), {
+        id: $cookies.get("gameId"),
+        turn: 0,
+        victory: false,
+        grid: json
       });
-    });
-    this.turn = 0;
-    $cookies.set("user-session", Math.random().toString(36).substring(2, 9), "320s");
+    }
+    catch (e){
+      console.error("Error creating new game: ", e);
+    }
   }
 
-  const json = JSON.parse(JSON.stringify(grid_json));
-  const id = $cookies.get("gameId")
-  const turn = ref(0);
-  const victory =ref(false);
-  const grid = ref(json);
-  const symbols = ref(["Cross","Triangle","Circle","Square"])
-  return { turn, grid, symbols, resetGrid };
+  const grids = await getDocs(collection(db, "games"));
+  const symbols = ["Cross","Triangle","Circle","Square"];
+
+  return { turn, grids, symbols, newGame };
+
 })
