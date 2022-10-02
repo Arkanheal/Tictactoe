@@ -8,6 +8,6 @@
 
 <style scoped>
 svg{
-  fill: #245232
+  fill: #245232;
 }
 </style>

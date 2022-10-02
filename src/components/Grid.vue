@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import Tile from "./Tile.vue";
-import { useGridStore } from '@/stores/grid.js'
+import { useGridStore } from '@/stores/grid.js';
 
 const gameSessionExist: boolean = $cookies.isKey('game-id');
 
@@ -59,7 +59,7 @@ function checkVictory(index: number, index_col: number) {
 function checkTurn(index: number, index_col : number) {
 
   if(!store.grid[index_col][index].clickable){
-    return
+    return;
   }
 
   if(store.turn === 0){

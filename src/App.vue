@@ -1,4 +1,5 @@
 <script setup lang="ts">
+
 import Grid from "./components/Grid.vue";
 import Header from "./components/Header.vue";
 import Victory from "./components/Victory.vue";
@@ -13,4 +14,5 @@ import Queue from "./components/Queue.vue";
 <Queue />
 <NewGame />
 <Grid />
+
 </template>

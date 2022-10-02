@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import { useQueueStore } from '@/stores/queue.js'
+
+import { useQueueStore } from '@/stores/queue.js';
   
 const queueStore = useQueueStore();
 
 const userSessionExist: boolean = $cookies.isKey('user-session');
+
 </script>
 
 

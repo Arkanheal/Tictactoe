@@ -11,7 +11,7 @@ const comp = computed(() => {
   if(props.symbol !== "") {
     return defineAsyncComponent(
       () => import(`./icons/${props.symbol}.vue`)
-    )
+    );
   }
 
 })
@@ -21,10 +21,9 @@ const comp = computed(() => {
 <template>
 
   <div class="cell" @click="$emit('checkTurn')">
-
     <component :is="comp"></component>
-
   </div>
+
 </template>
 
 <style scoped>

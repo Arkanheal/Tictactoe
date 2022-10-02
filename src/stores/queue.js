@@ -1,11 +1,11 @@
-import { ref, computed } from 'vue'
-import { defineStore } from 'pinia'
+import { ref } from 'vue';
+import { defineStore } from 'pinia';
 
 export const useQueueStore = defineStore('queue', () => {
 
   function checkQueue(){
     if (this.users.length >= 4) {
-      const gameId = ""
+      const gameId = "";
       gameId = this.users.slice(0,3).forEach(element => {
         gameId += element
       });

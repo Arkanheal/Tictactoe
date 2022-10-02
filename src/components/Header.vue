@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import { useGridStore } from '@/stores/grid.js'
+import { useGridStore } from '@/stores/grid.js';
 import { computed } from '@vue/reactivity';
 import { defineAsyncComponent } from 'vue';
 
@@ -11,12 +11,12 @@ const comp = computed(() => {
   if(store.turn === 0) {
     return defineAsyncComponent(
       () => import(`./icons/Cross.vue`)
-    )
+    );
   }
 
   return defineAsyncComponent(
     () => import(`./icons/${store.symbols[store.turn%4]}.vue`)
-  )
+  );
 
 })
 
