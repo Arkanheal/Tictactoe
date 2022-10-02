@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { useGridStore } from '@/stores/grid.js'
-const store = useGridStore();
+import { useQueueStore } from '@/stores/queue.js'
+const store = useQueueStore();
 const userSessionExist : String = $cookies.isKey('user-session');
 </script>
 
 <template>
   <div v-if="!userSessionExist">
-    <button id="newGame" @click="store.resetGrid()">Nouvelle partie</button>
+    <button id="newGame" @click="store.newArrival()">Nouvelle partie</button>
   </div>
 </template>
 
