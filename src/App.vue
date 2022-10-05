@@ -11,8 +11,11 @@ import Queue from "./components/Queue.vue";
 <template>
 <Header />
 <Victory />
+
 <Queue />
+
 <NewGame />
+
 <Grid />
 
 </template>
