@@ -1,30 +1,34 @@
+import db from '../firebase.ts';
 import { defineStore } from 'pinia';
-import { addDoc, collection, getDocs } from 'firebase/firestore';
+import { collection, doc, getDocs, limit, setDoc } from 'firebase/firestore';
 import grid_json from '../assets/json/grid.json';
 
 export const useGridStore = defineStore('grid', () => {
-
-  const addGame = async () => {
-    const json = JSON.parse(JSON.stringify(grid_json));
-    try {
-      await addDoc(collection(db, "games"), {
-        id: $cookies.get("gameId"),
-        turn: 0,
-        victory: false,
-        grid: json
-      });
-    }
-    catch (e){
-      console.error("Error creating new game: ", e);
-    }
-  }
 
   const getGames = async () => {
     await getDocs(collection(db, "games"));
   }
 
-  function newGame(){
-    addGame();
+  async function newGame(){
+
+    const json = JSON.parse(JSON.stringify(grid_json));
+    try {
+      const players = await getDocs(collection(db, "queue"), limit(4));
+      const playerIDs = [];
+      players.forEach((player) => {
+        playerIDs.push(player.id)
+      })
+      await setDoc(doc(db, "games", $cookies.get("game-id")), {
+        turn: 0,
+        victory: false,
+        grid: json,
+        playerIDs: playerIDs,
+      });
+    }
+    catch (e){
+      console.error("Error creating new game: ", e);
+    }
+
   }
 
   const grids = getGames();
