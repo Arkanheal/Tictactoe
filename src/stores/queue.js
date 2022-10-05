@@ -1,29 +1,47 @@
-import { ref } from 'vue';
+import db from '../firebase.ts';
 import { defineStore } from 'pinia';
-
+import { useGridStore } from './grid.js';
+import { collection, doc, getDocs, setDoc } from 'firebase/firestore';
 export const useQueueStore = defineStore('queue', () => {
 
-  function checkQueue(){
-    if (this.users.length >= 4) {
-      const gameId = "";
-      gameId = this.users.slice(0,3).forEach(element => {
-        gameId += element
+  let userCookie = "";
+
+  const addPlayerinQueue = async () => {
+    try {
+      await setDoc(doc(db, "queue", $cookies.get("user-session")), {
+        date: Date.now(),
       });
-      $cookies.set("game-id", gameId, "320s");
-      // I kinda don't like this but sets duration for the game
-      // vue-cookie doesn't have an API to just change the duration
-      $cookies.set("user-session", $cookies.get("user-session"), "320s");
+    }
+    catch (e){
+      console.error("Error adding player to the queue: ", e);
     }
   }
 
-  function newArrival(){
-    // Duration is session while we wait in queue
-    $cookies.set("user-session", Math.random().toString(36).substring(2, 9), 0);
-    this.users.push($cookies.get("user-session"));
-    this.checkQueue();
+  async function queueSize() {
+    const queue = await getDocs(collection(db, "queue"));
+    console.log()
+    return queue.size;
   }
 
-  let users = ref(localStorage.setItem('users', []));
+  function newArrival() {
+    const queueSize = queueSize();
+    const gridStore = useGridStore();
 
-  return { users, newArrival, checkQueue };
+    if (!$cookies.isKey("user-session")){
+      userCookie = Math.random().toString(36).substring(2, 9); 
+      $cookies.set("user-session", userCookie, 0);
+    } else {
+      userCookie = $cookies.get("user-session");
+    }
+
+    if (queueSize < 4){
+      addPlayerinQueue();
+    } else {
+      userCookie = $cookies.set("user-session", userCookie, "320s");
+      gridStore.newGame();
+    }
+
+  }
+
+  return { newArrival, queueSize };
 });
