@@ -8,15 +8,17 @@ const store = useGridStore();
 
 const comp = computed(() => {
 
-  if(store.turn === 0) {
+  if($cookies.isKey('game-id')){
+    if(store.turn === 0) {
+      return defineAsyncComponent(
+        () => import(`./icons/Cross.vue`)
+      );
+    }
+
     return defineAsyncComponent(
-      () => import(`./icons/Cross.vue`)
+      () => import(`./icons/${store.symbols[store.turn%4]}.vue`)
     );
   }
-
-  return defineAsyncComponent(
-    () => import(`./icons/${store.symbols[store.turn%4]}.vue`)
-  );
 
 })
 
