@@ -1,7 +1,7 @@
 import db from '../firebase.ts';
 import { defineStore } from 'pinia';
 import { useGridStore } from './grid.js';
-import { collection, deleteDoc, doc, getDocs, setDoc } from 'firebase/firestore';
+import { collection, deleteDoc, doc, getDocs, limit, setDoc } from 'firebase/firestore';
 import { inject } from 'vue';
 
 export const useQueueStore = defineStore('queue', () => {
@@ -21,9 +21,12 @@ export const useQueueStore = defineStore('queue', () => {
     }
   }
 
-  const removePlayerFromQueue = async (userId) => {
+  const removePlayerFromQueue = async () => {
     try {
-      await deleteDoc(doc(db, "queue", userId));
+      const queue = await getDocs(collection(db, "queue"), limit(4));
+      queue.forEach(async (player) => {
+        await deleteDoc(doc(db, "queue", player.id));
+      })
     }
     catch (e){
       console.error("Error removing player from the queue: ", e);
@@ -52,7 +55,7 @@ export const useQueueStore = defineStore('queue', () => {
     } else {
       console.log(queueSize);
       $cookies.set("user-session", userCookie, "320s");
-      removePlayerFromQueue(userCookie);
+      removePlayerFromQueue();
       gridStore.newGame();
     }
 
