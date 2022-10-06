@@ -1,13 +1,16 @@
 <script setup lang="ts">
+import { inject } from "vue";
+import type { VueCookies } from "vue-cookies";
 import QueuePos from "./QueuePos.vue";
 
+const $cookies = inject<VueCookies>('$cookies');
 const userSessionExist: boolean = $cookies.isKey('user-session');
 
 </script>
 
-<template v-if="userSessionExist">
+<template>
 
-<div class="queue_wrapper">
+<div class="queue_wrapper" v-if="userSessionExist">
   <div class="main_queue_text">
     Position in queue:
   </div>

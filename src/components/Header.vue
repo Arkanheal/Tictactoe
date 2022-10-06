@@ -2,9 +2,11 @@
 
 import { useGridStore } from '@/stores/grid.js';
 import { computed } from '@vue/reactivity';
-import { defineAsyncComponent } from 'vue';
+import { defineAsyncComponent, inject } from 'vue';
+import type { VueCookies } from 'vue-cookies';
 
 const store = useGridStore();
+const $cookies = inject<VueCookies>('$cookies');
 
 const comp = computed(() => {
 

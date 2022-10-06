@@ -1,9 +1,12 @@
-import db from '../firebase.ts';
 import { defineStore } from 'pinia';
+import db from '../firebase.ts';
 import { collection, doc, getDocs, limit, setDoc } from 'firebase/firestore';
+import { inject } from 'vue';
 import grid_json from '../assets/json/grid.json';
 
 export const useGridStore = defineStore('grid', () => {
+
+  const $cookies = inject('$cookies');
 
   const getGames = async () => {
     await getDocs(collection(db, "games"));
@@ -12,12 +15,13 @@ export const useGridStore = defineStore('grid', () => {
   async function newGame(){
 
     const json = JSON.parse(JSON.stringify(grid_json));
+      const playerIDs = [];
     try {
       const players = await getDocs(collection(db, "queue"), limit(4));
-      const playerIDs = [];
       players.forEach((player) => {
         playerIDs.push(player.id)
       })
+
       await setDoc(doc(db, "games", $cookies.get("game-id")), {
         turn: 0,
         victory: false,

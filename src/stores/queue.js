@@ -1,43 +1,58 @@
 import db from '../firebase.ts';
 import { defineStore } from 'pinia';
 import { useGridStore } from './grid.js';
-import { collection, doc, getDocs, setDoc } from 'firebase/firestore';
+import { collection, deleteDoc, doc, getDocs, setDoc } from 'firebase/firestore';
+import { inject } from 'vue';
+
 export const useQueueStore = defineStore('queue', () => {
 
-  let userCookie = "";
+  const $cookies = inject('$cookies');
 
-  const addPlayerinQueue = async () => {
+  const addPlayerinQueue = async (userId) => {
     try {
-      await setDoc(doc(db, "queue", $cookies.get("user-session")), {
+
+      await setDoc(doc(db, "queue", userId), {
         date: Date.now(),
       });
+
     }
     catch (e){
       console.error("Error adding player to the queue: ", e);
     }
   }
 
+  const removePlayerFromQueue = async (userId) => {
+    try {
+      await deleteDoc(doc(db, "queue", userId));
+    }
+    catch (e){
+      console.error("Error removing player from the queue: ", e);
+    }
+  }
+
   async function queueSize() {
     const queue = await getDocs(collection(db, "queue"));
-    console.log()
     return queue.size;
   }
 
-  function newArrival() {
-    const queueSize = queueSize();
+  async function newArrival() {
+    const queueSize = await this.queueSize();
     const gridStore = useGridStore();
+    let userCookie = "";
 
     if (!$cookies.isKey("user-session")){
       userCookie = Math.random().toString(36).substring(2, 9); 
-      $cookies.set("user-session", userCookie, 0);
-    } else {
-      userCookie = $cookies.get("user-session");
+      $cookies.set("user-session", userCookie, -1);
     }
 
-    if (queueSize < 4){
-      addPlayerinQueue();
+    userCookie = $cookies.get("user-session");
+
+    if (queueSize < 4) {
+      addPlayerinQueue(userCookie);
     } else {
-      userCookie = $cookies.set("user-session", userCookie, "320s");
+      console.log(queueSize);
+      $cookies.set("user-session", userCookie, "320s");
+      removePlayerFromQueue(userCookie);
       gridStore.newGame();
     }
 

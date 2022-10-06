@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import { useQueueStore } from '@/stores/queue.js'
+import { inject } from 'vue';
+import type { VueCookies } from 'vue-cookies';
 
 const store = useQueueStore();
-const userSessionExist : String = $cookies.isKey('user-session');
+const $cookies = inject<VueCookies>('$cookies');
+const userSessionExist : boolean = $cookies.isKey('user-session');
 
 </script>
 

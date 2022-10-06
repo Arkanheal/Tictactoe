@@ -2,6 +2,10 @@
 
 import Tile from "./Tile.vue";
 import { useGridStore } from '@/stores/grid.js';
+import { inject } from "vue";
+import type { VueCookies } from "vue-cookies";
+
+const $cookies = inject<VueCookies>('$cookies');
 
 const gameSessionExist: boolean = $cookies.isKey('game-id');
 
