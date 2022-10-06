@@ -12,7 +12,7 @@
     "firebase": "^9.10.0",
     "pinia": "^2.0.21",
     "vue": "^3.2.38",
-    "vue3-cookies": "^1.0.6"
+    "vue-cookies": "^1.8.1"
   },
   "devDependencies": {
     "@types/node": "^16.11.56",
